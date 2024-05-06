@@ -4,6 +4,188 @@ info:
   name: ''
   description: ''
 paths:
+  /blog.blog.Msg/CreatePost:
+    post:
+      operationId: BlogBlogMsg_CreatePost
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              title:
+                type: string
+              body:
+                type: string
+      tags:
+        - Msg
+  /blog.blog.Msg/DeletePost:
+    post:
+      operationId: BlogBlogMsg_DeletePost
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              id:
+                type: string
+                format: uint64
+      tags:
+        - Msg
+  /blog.blog.Msg/UpdateParams:
+    post:
+      summary: |-
+        UpdateParams defines a (governance) operation for updating the module
+        parameters. The authority defaults to the x/gov module account.
+      operationId: BlogBlogMsg_UpdateParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            description: >-
+              MsgUpdateParamsResponse defines the response structure for
+              executing a
+
+              MsgUpdateParams message.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          description: MsgUpdateParams is the Msg/UpdateParams request type.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              authority:
+                type: string
+                description: >-
+                  authority is the address that controls the module (defaults to
+                  x/gov unless overwritten).
+              params:
+                description: 'NOTE: All parameters must be supplied.'
+                type: object
+            description: MsgUpdateParams is the Msg/UpdateParams request type.
+      tags:
+        - Msg
+  /blog.blog.Msg/UpdatePost:
+    post:
+      operationId: BlogBlogMsg_UpdatePost
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              title:
+                type: string
+              body:
+                type: string
+              id:
+                type: string
+                format: uint64
+      tags:
+        - Msg
   /blog/blog/list_post:
     get:
       summary: Queries a list of ListPost items.
@@ -15,17 +197,19 @@ paths:
             type: object
             properties:
               post:
-                type: object
-                properties:
-                  title:
-                    type: string
-                  body:
-                    type: string
-                  creator:
-                    type: string
-                  id:
-                    type: string
-                    format: uint64
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    body:
+                      type: string
+                    creator:
+                      type: string
+                    id:
+                      type: string
+                      format: uint64
               pagination:
                 type: object
                 properties:
@@ -215,188 +399,6 @@ paths:
           format: uint64
       tags:
         - Query
-  /blog.blog.Msg/CreatePost:
-    post:
-      operationId: BlogBlogMsg_CreatePost
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uint64
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              title:
-                type: string
-              body:
-                type: string
-      tags:
-        - Msg
-  /blog.blog.Msg/DeletePost:
-    post:
-      operationId: BlogBlogMsg_DeletePost
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              id:
-                type: string
-                format: uint64
-      tags:
-        - Msg
-  /blog.blog.Msg/UpdateParams:
-    post:
-      summary: |-
-        UpdateParams defines a (governance) operation for updating the module
-        parameters. The authority defaults to the x/gov module account.
-      operationId: BlogBlogMsg_UpdateParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            description: >-
-              MsgUpdateParamsResponse defines the response structure for
-              executing a
-
-              MsgUpdateParams message.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          description: MsgUpdateParams is the Msg/UpdateParams request type.
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              authority:
-                type: string
-                description: >-
-                  authority is the address that controls the module (defaults to
-                  x/gov unless overwritten).
-              params:
-                description: 'NOTE: All parameters must be supplied.'
-                type: object
-            description: MsgUpdateParams is the Msg/UpdateParams request type.
-      tags:
-        - Msg
-  /blog.blog.Msg/UpdatePost:
-    post:
-      operationId: BlogBlogMsg_UpdatePost
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              title:
-                type: string
-              body:
-                type: string
-              id:
-                type: string
-                format: uint64
-      tags:
-        - Msg
   /cosmos.auth.v1beta1.Msg/UpdateParams:
     post:
       summary: >-
@@ -16948,6 +16950,62 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
+  blog.blog.MsgCreatePost:
+    type: object
+    properties:
+      creator:
+        type: string
+      title:
+        type: string
+      body:
+        type: string
+  blog.blog.MsgCreatePostResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
+  blog.blog.MsgDeletePost:
+    type: object
+    properties:
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+  blog.blog.MsgDeletePostResponse:
+    type: object
+  blog.blog.MsgUpdateParams:
+    type: object
+    properties:
+      authority:
+        type: string
+        description: >-
+          authority is the address that controls the module (defaults to x/gov
+          unless overwritten).
+      params:
+        description: 'NOTE: All parameters must be supplied.'
+        type: object
+    description: MsgUpdateParams is the Msg/UpdateParams request type.
+  blog.blog.MsgUpdateParamsResponse:
+    type: object
+    description: |-
+      MsgUpdateParamsResponse defines the response structure for executing a
+      MsgUpdateParams message.
+  blog.blog.MsgUpdatePost:
+    type: object
+    properties:
+      creator:
+        type: string
+      title:
+        type: string
+      body:
+        type: string
+      id:
+        type: string
+        format: uint64
+  blog.blog.MsgUpdatePostResponse:
+    type: object
   blog.blog.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -16967,17 +17025,19 @@ definitions:
     type: object
     properties:
       post:
-        type: object
-        properties:
-          title:
-            type: string
-          body:
-            type: string
-          creator:
-            type: string
-          id:
-            type: string
-            format: uint64
+        type: array
+        items:
+          type: object
+          properties:
+            title:
+              type: string
+            body:
+              type: string
+            creator:
+              type: string
+            id:
+              type: string
+              format: uint64
       pagination:
         type: object
         properties:
@@ -17103,62 +17163,6 @@ definitions:
                repeated Bar results = 1;
                PageResponse page = 2;
        }
-  blog.blog.MsgCreatePost:
-    type: object
-    properties:
-      creator:
-        type: string
-      title:
-        type: string
-      body:
-        type: string
-  blog.blog.MsgCreatePostResponse:
-    type: object
-    properties:
-      id:
-        type: string
-        format: uint64
-  blog.blog.MsgDeletePost:
-    type: object
-    properties:
-      creator:
-        type: string
-      id:
-        type: string
-        format: uint64
-  blog.blog.MsgDeletePostResponse:
-    type: object
-  blog.blog.MsgUpdateParams:
-    type: object
-    properties:
-      authority:
-        type: string
-        description: >-
-          authority is the address that controls the module (defaults to x/gov
-          unless overwritten).
-      params:
-        description: 'NOTE: All parameters must be supplied.'
-        type: object
-    description: MsgUpdateParams is the Msg/UpdateParams request type.
-  blog.blog.MsgUpdateParamsResponse:
-    type: object
-    description: |-
-      MsgUpdateParamsResponse defines the response structure for executing a
-      MsgUpdateParams message.
-  blog.blog.MsgUpdatePost:
-    type: object
-    properties:
-      creator:
-        type: string
-      title:
-        type: string
-      body:
-        type: string
-      id:
-        type: string
-        format: uint64
-  blog.blog.MsgUpdatePostResponse:
-    type: object
   cosmos.auth.v1beta1.MsgUpdateParams:
     type: object
     properties:
