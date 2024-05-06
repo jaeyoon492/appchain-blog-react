@@ -1,5 +1,5 @@
-version: 1
 validation: sovereign
+version: 1
 accounts:
   - name: alice
     coins:
@@ -10,16 +10,22 @@ accounts:
       - 10000token
       - 100000000stake
   - name: frank
-    coins: ["1000token", "100000000stake"]
-    mnemonic: play butter frown city voyage pupil rabbit wheat thrive mind skate turkey helmet thrive door either differ gate exhibit impose city swallow goat faint
-client:
-  openapi:
-    path: docs/static/openapi.yml
+    coins:
+      - 1000token
+      - 100000000stake
+    mnemonic: 12 words
 faucet:
   name: bob
   coins:
     - 5token
     - 100000stake
+client:
+  typescript:
+    path: ts-client
+  hooks:
+    path: react/src/hooks
+  openapi:
+    path: docs/static/openapi.yml
 validators:
   - name: alice
     bonded: 100000000stake
